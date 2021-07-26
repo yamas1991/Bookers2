@@ -1,0 +1,33 @@
+ <% if flash[:notice] %>
+   <p id="notice">
+     <%= flash[:notice] %>
+   </p>
+ <% end %>
+
+<%= render 'books/booklist', user: @user, book: @book %>
+
+
+<h1>Book detail</h1>
+
+<table>
+ <tr>
+  <th>usergazou</th>
+  <th>name</th>
+  <th>booktitle</th>
+  <th>bookopinion</th>
+  <th>edit</th>
+  <th>destroy</th>
+ </tr>
+
+ <!--each文はやる必要ない、だって詳細ページはひとつだけだから-->
+  <tr align="left">
+    <td><%= attachment_image_tag @user, :profile_image, size: "100x100", format: 'jpeg', fallback: "no_image.jpg" %></td>
+    <td><%= link_to @book.user.name, @book.user %></td>
+    <td><%= link_to @book.title, book_path %></td>
+    <td><%= @book.body %></td>
+    <% if @book.user_id == current_user.id %>
+      <td><%= link_to "編集", edit_book_path(@book) %></td>
+      <td><%= link_to "削除", book_path(@book), method: :delete, data: {confirm: "本当に消しますか？"} %></td>
+  </tr>
+ <% end %>
+</table>
