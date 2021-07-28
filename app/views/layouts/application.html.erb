@@ -58,13 +58,13 @@
         <% end %>
 
         <li class="アバウト">
-          <%= link_to homes_about_path, class:"btn btn-link" do %>
+          <%= link_to home_about_path, class:"btn btn-link" do %>
           <span class="fas fa-link">About</span>
         <% end %>
 
         <li class="サインアップ">
           <%= link_to new_user_registration_path, class:"btn btn-link" do %>
-          <span class="fas fa-user-plus">Signup</span>
+          <span class="fas fa-user-plus">Sign up</span>
         <% end %>
 
         <li class="ログイン">
@@ -84,7 +84,7 @@
       <%= flash[:notice] %>
     </p>
   <% end %>
- 
+
   <%= yield %>
 
 <footer class="footer">
