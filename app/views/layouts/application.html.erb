@@ -1,44 +1,96 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bookers2</title>
+    <script src="https://kit.fontawesome.com/023dfb7be6.js" crossorigin="anonymous"></script>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <% if user_signed_in? %>
-      <li>
-        <%= link_to 'マイページ(HOME)', user_path(current_user.id) %>
-      </li>
-      <li>
-        <%= link_to 'ユーザー一覧(USERS)', users_path %>
-      </li>
-      <li>
-        <%= link_to 'ブック一覧(BOOKS)', books_path %>
-      </li>
-      <li>
-        <%= link_to "ログアウト(LOGOUT)", destroy_user_session_path, method: :delete %>
-      </li>
 
-    <% else %>
-      <li>
-        <%= link_to "新規登録", new_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to "ログイン", new_user_session_path %>
-      </li>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
 
+    <%= link_to root_path, class:"navbar-brand" do %>
+    <span>Bookers</span>
     <% end %>
 
-    <%= yield %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <% if user_signed_in? %>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+
+        <li class="ホーム">
+          <%= link_to user_path(current_user), class:"btn btn-link" do %>
+          <span class="fas fa-house-user">Home</span>
+        <% end %>
+
+        <li class="ユーザーズ">
+          <%= link_to users_path, class:"btn btn-link" do %>
+          <span class="fas fa-users">Users</span>
+        <% end %>
+
+        <li class="ブックス">
+          <%= link_to books_path, class:"btn btn-link" do %>
+          <span class="fas fa-book-open">Books</span>
+        <% end %>
+
+        <li class="ログアウト">
+          <%= link_to destroy_user_session_path, method: :delete, class:"btn btn-link" do %>
+          <span class="fas fa-sign-out-alt">Logout</span>
+        <% end %>
+      </ul>
+    </div>
+
+    <% else %>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+
+        <li class="ホーム">
+          <%= link_to root_path, class:"btn btn-link" do %>
+          <span class="fas fa-house-user">Home</span>
+        <% end %>
+
+        <li class="アバウト">
+          <%= link_to homes_about_path, class:"btn btn-link" do %>
+          <span class="fas fa-link">About</span>
+        <% end %>
+
+        <li class="サインアップ">
+          <%= link_to new_user_registration_path, class:"btn btn-link" do %>
+          <span class="fas fa-user-plus">Signup</span>
+        <% end %>
+
+        <li class="ログイン">
+          <%= link_to new_user_session_path, class:"btn btn-link" do %>
+          <span class="fas fa-sign-in-alt">Login</span>
+        <% end %>
+
+      </ul>
+    </div>
+      <% end %>
+
+  </div>
+  </nav>
+
+  <% if flash[:notice] %>
+    <p id="notice">
+      <%= flash[:notice] %>
+    </p>
+  <% end %>
+ 
+  <%= yield %>
+
+<footer class="footer">
+  <div class="text-center">
+    <p class="text-muted">CopyRight Inflatop.inc</p>
+  </div>
+</footer>
+
   </body>
-
-  <footer>
-    <p>CopyRight Inflatop.inc</p>
-  </footer>
-
-</html>

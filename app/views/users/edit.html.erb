@@ -1,15 +1,13 @@
-<h2>Userinfo(プロフィール編集)</h2>
-<%= form_with model:@user, local:true do |f| %>
-
-  <p label for="inputName">Name</label>
-  <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前"%></p>
-
-  <label for="inputImage">Image</label>
-    <%= f.attachment_field :profile_image, placeholder: "プロフィール画像" %>
-    <p><%= attachment_image_tag @user, :profile_image, size: "100x100", fallback: "no_image.jpg"%></p>
-
-  <p label for="inputIntroduction">Introduction</label>
-  <%= f.text_field :introduction, autofocus: true, id:"inputIntroduction", placeholder:"説明"%></p>
-
-  <%= f.submit "Update User" %>
+<h1>User info</h1>
+<%= form_for(@user) do |f| %>
+<%= render 'books/error', model: @user %>
+  <div class="user-name">Name</div>
+    <%= f.text_field :name %>
+  <div class="user-edit-image">Image</div>
+    <%= f.attachment_field :profile_image %>
+  <div class="form-body">Introduction</div>
+    <%= f.text_area :introduction %><br>
+  <div class="upload">
+    <%= f.submit " Update User" %>
+  </div>
 <% end %>
